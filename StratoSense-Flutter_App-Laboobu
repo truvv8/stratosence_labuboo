@@ -273,8 +273,8 @@ class _CosmicLoginScreenState extends State<CosmicLoginScreen>
                 return Align(
                   alignment:
                   Alignment(lerpDouble(-0.6, 0.6, _bgAnim.value)!, -0.9),
-                  child: _neonOrb(
-                      220, const Color(0xFF7D6BFF).withOpacity(.28)),
+                  child:
+                  _neonOrb(220, const Color(0xFF7D6BFF).withOpacity(.28)),
                 );
               },
             ),
@@ -311,7 +311,7 @@ class _CosmicLoginScreenState extends State<CosmicLoginScreen>
                               .fadeIn(duration: 600.ms)
                               .slideY(begin: .2, end: 0),
                           const SizedBox(height: 18),
-                          Text('Добро пожаловать',
+                          Text('Welcome',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.spaceGrotesk(
                                   fontSize: 30,
@@ -321,12 +321,12 @@ class _CosmicLoginScreenState extends State<CosmicLoginScreen>
                             controller: _firstCtrl,
                             textInputAction: TextInputAction.next,
                             decoration: const InputDecoration(
-                              hintText: 'Имя',
+                              hintText: 'First name',
                               prefixIcon: Icon(Icons.person_outline),
                             ),
                             validator: (v) => (v == null ||
                                 v.trim().length < 2)
-                                ? 'Введите имя'
+                                ? 'Enter your first name'
                                 : null,
                           ),
                           const SizedBox(height: 12),
@@ -334,18 +334,18 @@ class _CosmicLoginScreenState extends State<CosmicLoginScreen>
                             controller: _lastCtrl,
                             textInputAction: TextInputAction.done,
                             decoration: const InputDecoration(
-                              hintText: 'Фамилия',
+                              hintText: 'Last name',
                               prefixIcon: Icon(Icons.badge_outlined),
                             ),
                             validator: (v) => (v == null ||
                                 v.trim().length < 2)
-                                ? 'Введите фамилию'
+                                ? 'Enter your last name'
                                 : null,
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton.icon(
                             icon: const Icon(Icons.login),
-                            label: const Text('Войти'),
+                            label: const Text('Sign in'),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 state.login(
@@ -414,11 +414,11 @@ class _ShellScreenState extends State<ShellScreen> {
             backgroundColor: Colors.transparent,
             destinations: const [
               NavigationDestination(
-                  icon: Icon(Icons.add_a_photo_outlined), label: 'Скан'),
+                  icon: Icon(Icons.add_a_photo_outlined), label: 'Scan'),
               NavigationDestination(
-                  icon: Icon(Icons.person_outline), label: 'Профиль'),
+                  icon: Icon(Icons.person_outline), label: 'Profile'),
               NavigationDestination(
-                  icon: Icon(Icons.map_outlined), label: 'Карта'),
+                  icon: Icon(Icons.map_outlined), label: 'Map'),
             ],
           ),
         ),
@@ -452,7 +452,7 @@ class _ScanPageState extends State<ScanPage> {
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: Text('Отправка изображения',
+              child: Text('Upload image',
                   style: GoogleFonts.spaceGrotesk(
                       fontSize: 24, fontWeight: FontWeight.w700)),
             ).animate().fadeIn(duration: 450.ms, curve: Curves.easeOut),
@@ -462,10 +462,10 @@ class _ScanPageState extends State<ScanPage> {
               spacing: 8,
               runSpacing: 8,
               children: [
-                _statChip(Icons.auto_awesome, 'Очки',
+                _statChip(Icons.auto_awesome, 'Points',
                     state.points.toString()),
-                _statChip(Icons.military_tech, 'Уровень', '${state.level}'),
-                _statChip(Icons.local_fire_department, 'Стрик',
+                _statChip(Icons.military_tech, 'Level', '${state.level}'),
+                _statChip(Icons.local_fire_department, 'Streak',
                     '${state.dailyStreak}'),
               ],
             ),
@@ -495,7 +495,7 @@ class _ScanPageState extends State<ScanPage> {
                           const Icon(Icons.image_outlined, size: 72),
                           const SizedBox(height: 12),
                           Text(
-                            'Нажмите, чтобы выбрать изображение',
+                            'Tap to choose an image',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white.withOpacity(.8)),
@@ -518,7 +518,7 @@ class _ScanPageState extends State<ScanPage> {
                 Expanded(
                   child: _CosmicButton(
                     icon: Icons.photo_library_outlined,
-                    label: 'Галерея',
+                    label: 'Gallery',
                     onPressed: _pickFromGallery,
                   ),
                 ),
@@ -526,7 +526,7 @@ class _ScanPageState extends State<ScanPage> {
                 Expanded(
                   child: _CosmicButton(
                     icon: Icons.photo_camera_outlined,
-                    label: 'Камера',
+                    label: 'Camera',
                     onPressed: _pickFromCamera,
                   ),
                 ),
@@ -542,7 +542,7 @@ class _ScanPageState extends State<ScanPage> {
                 children: const [
                   Icon(Icons.rocket_launch_outlined),
                   SizedBox(width: 8),
-                  Text('Отправить'),
+                  Text('Submit'),
                 ],
               ),
             ),
@@ -569,7 +569,7 @@ class _ScanPageState extends State<ScanPage> {
         });
       }
     } catch (e) {
-      _showSnack('Не удалось открыть галерею');
+      _showSnack('Failed to open gallery');
     }
   }
 
@@ -584,11 +584,11 @@ class _ScanPageState extends State<ScanPage> {
         });
       }
     } catch (e) {
-      _showSnack('Не удалось открыть камеру');
+      _showSnack('Failed to open camera');
     }
   }
 
-  // мгновенное начисление очков, без диалогов
+  // instant points awarding, no dialogs
   Future<void> _send(BuildContext context) async {
     final state = AppStateProvider.of(context);
     setState(() => _processing = true);
@@ -599,15 +599,15 @@ class _ScanPageState extends State<ScanPage> {
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Изображение принято: +50 баллов')),
+      const SnackBar(content: Text('Image accepted: +50 points')),
     );
     if (state.level > oldLevel) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Новый уровень: ${state.level}!')),
+        SnackBar(content: Text('New level: ${state.level}!')),
       );
     }
 
-    // опционально сбрасываем выбранное изображение
+    // optionally clear the selected image
     setState(() {
       _selected = null;
       _processing = false;
@@ -661,7 +661,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Профиль',
+            Text('Profile',
                 style: GoogleFonts.spaceGrotesk(
                     fontSize: 26, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
@@ -686,7 +686,7 @@ class ProfilePage extends StatelessWidget {
                           const Icon(Icons.auto_awesome,
                               size: 18, color: Colors.white70),
                           const SizedBox(width: 6),
-                          Text('Баллы: ${state.points}',
+                          Text('Points: ${state.points}',
                               style: const TextStyle(
                                   fontWeight: FontWeight.w600)),
                         ]),
@@ -695,7 +695,7 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             const Icon(Icons.military_tech, size: 18),
                             const SizedBox(width: 6),
-                            Text('Уровень ${state.level}'),
+                            Text('Level ${state.level}'),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -711,7 +711,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                            'До след. уровня: ${state.nextLevelAt - state.points} оч.',
+                            'To next level: ${state.nextLevelAt - state.points} pts',
                             style: TextStyle(
                                 color: Colors.white.withOpacity(.8),
                                 fontSize: 12)),
@@ -737,11 +737,11 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Ежедневная комета',
+                        const Text('Daily Comet',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w700)),
                         Text(
-                            'Стрик: ${state.dailyStreak}  ·  Награда сегодня: +${state.nextDailyReward}'),
+                            'Streak: ${state.dailyStreak}  ·  Today’s reward: +${state.nextDailyReward}'),
                       ],
                     ),
                   ),
@@ -755,17 +755,17 @@ class ProfilePage extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content: Text(
-                                    'Новый уровень: ${state.level}!')),
+                                    'New level: ${state.level}!')),
                           );
                         }
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content: Text('Бонус получен!')),
+                              content: Text('Daily bonus claimed!')),
                         );
                       }
                     }
                         : null,
-                    child: const Text('Забрать'),
+                    child: const Text('Claim'),
                   ),
                 ],
               ),
@@ -780,13 +780,13 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Квесты дня',
+                  const Text('Daily Quests',
                       style: TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 10),
                   _QuestTile(
-                    title: 'Новобранец',
-                    subtitle: 'Отправьте 1 изображение',
+                    title: 'Rookie',
+                    subtitle: 'Upload 1 image',
                     progress: min(1.0, state.uploadsTotal / 1.0),
                     label: '${min(state.uploadsTotal, 1)}/1',
                     claimed: state.questClaimed['upload1']!,
@@ -797,15 +797,15 @@ class ProfilePage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content:
-                              Text('Новый уровень: ${state.level}!')),
+                              Text('New level: ${state.level}!')),
                         );
                       }
                     },
                   ),
                   const SizedBox(height: 10),
                   _QuestTile(
-                    title: 'Пилот камеры',
-                    subtitle: 'Сделайте снимок с камеры',
+                    title: 'Camera Pilot',
+                    subtitle: 'Take a photo with the camera',
                     progress: min(1.0, state.uploadsFromCamera / 1.0),
                     label: '${min(state.uploadsFromCamera, 1)}/1',
                     claimed: state.questClaimed['camera1']!,
@@ -816,15 +816,15 @@ class ProfilePage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content:
-                              Text('Новый уровень: ${state.level}!')),
+                              Text('New level: ${state.level}!')),
                         );
                       }
                     },
                   ),
                   const SizedBox(height: 10),
                   _QuestTile(
-                    title: 'Метеоролог',
-                    subtitle: 'Обновите TEMPO 3 раза',
+                    title: 'Meteorologist',
+                    subtitle: 'Refresh TEMPO 3 times',
                     progress: min(1.0, state.tempoRefreshes / 3.0),
                     label: '${min(state.tempoRefreshes, 3)}/3',
                     claimed: state.questClaimed['tempo3']!,
@@ -835,13 +835,13 @@ class ProfilePage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content:
-                              Text('Новый уровень: ${state.level}!')),
+                              Text('New level: ${state.level}!')),
                         );
                       }
                     },
                   ),
                   const SizedBox(height: 6),
-                  const Text('Награда за каждый квест: +30 очков',
+                  const Text('Reward for each quest: +30 points',
                       style: TextStyle(fontSize: 12)),
                 ],
               ),
@@ -856,7 +856,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Достижения',
+                  const Text('Achievements',
                       style: TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 10),
@@ -864,11 +864,11 @@ class ProfilePage extends StatelessWidget {
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      _badge('first_upload', 'Первый запуск',
+                      _badge('first_upload', 'First Upload',
                           state.badges.contains('first_upload')),
-                      _badge('lvl3', 'Уровень 3+',
+                      _badge('lvl3', 'Level 3+',
                           state.badges.contains('lvl3')),
-                      _badge('streak3', 'Стрик ×3',
+                      _badge('streak3', 'Streak ×3',
                           state.badges.contains('streak3')),
                     ],
                   ),
@@ -885,7 +885,7 @@ class ProfilePage extends StatelessWidget {
               child: _Leaderboard(
                   userPoints: state.points,
                   userName:
-                  state.firstName.isEmpty ? 'Вы' : state.firstName),
+                  state.firstName.isEmpty ? 'You' : state.firstName),
             ),
           ],
         ),
@@ -984,7 +984,7 @@ class _QuestTile extends StatelessWidget {
               color: Colors.lightGreenAccent)
               : ElevatedButton(
             onPressed: canClaim ? onClaim : null,
-            child: const Text('Забрать'),
+            child: const Text('Claim'),
           ),
         ],
       ),
@@ -1050,7 +1050,7 @@ class _Leaderboard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Лидерборд',
+        const Text('Leaderboard',
             style:
             TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
@@ -1089,29 +1089,29 @@ class _Leaderboard extends StatelessWidget {
 // =================== MAP PAGE (with Heatmap + OpenAQ) ===================
 
 enum _AirSource { tempo, openaq }
-// Цветовая серьёзность для карточки рекомендаций
+// Severity level for recommendation card
 enum _Severity { green, yellow, red }
 
-// Градиент/иконка/заголовок по уровню серьёзности (top-level, чтобы использовать в карточке)
+// Gradient/icon/title by severity (top-level so we can use in the card)
 (LinearGradient, IconData, String) severityStyle(_Severity s) {
   switch (s) {
     case _Severity.green:
       return (
       const LinearGradient(colors: [Color(0xFF2ECC71), Color(0xFF27AE60)]),
       Icons.check_circle,
-      'Зелёный уровень'
+      'Green level'
       );
     case _Severity.yellow:
       return (
       const LinearGradient(colors: [Color(0xFFF1C40F), Color(0xFFF39C12)]),
       Icons.warning_amber_rounded,
-      'Жёлтый уровень'
+      'Yellow level'
       );
     case _Severity.red:
       return (
       const LinearGradient(colors: [Color(0xFFE74C3C), Color(0xFFC0392B)]),
       Icons.report_rounded,
-      'Красный уровень'
+      'Red level'
       );
   }
 }
@@ -1125,14 +1125,14 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   LatLng? _center;
 
-  // Map controller (двигаем карту при смене центра)
+  // Map controller (move map when center changes)
   late final fm.MapController _mapController;
 
   // TEMPO (fake) UI
   int? _aqi;
   String _label = '';
   Color _aqiColor = const Color(0xFF2ecc71);
-  String _status = 'Определяем позицию…';
+  String _status = 'Detecting location…';
 
   // source mode
   _AirSource _mode = _AirSource.tempo;
@@ -1165,7 +1165,7 @@ class _MapPageState extends State<MapPage> {
   void _moveMap(LatLng p) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       try {
-        _mapController.move(p, 13); // держим зум 13
+        _mapController.move(p, 13); // fixed zoom 13
       } catch (_) {}
     });
   }
@@ -1173,7 +1173,7 @@ class _MapPageState extends State<MapPage> {
   Future<void> _initLocation() async {
     try {
       if (!await Geolocator.isLocationServiceEnabled()) {
-        setState(() => _status = 'Геолокация выключена');
+        setState(() => _status = 'Location services are disabled');
         return;
       }
       LocationPermission perm = await Geolocator.checkPermission();
@@ -1182,7 +1182,7 @@ class _MapPageState extends State<MapPage> {
       }
       if (perm == LocationPermission.denied ||
           perm == LocationPermission.deniedForever) {
-        setState(() => _status = 'Нет доступа к геолокации');
+        setState(() => _status = 'No location permission');
         return;
       }
       final pos = await Geolocator.getCurrentPosition(
@@ -1196,7 +1196,7 @@ class _MapPageState extends State<MapPage> {
         _fetchOpenAQ();
       }
     } catch (e) {
-      setState(() => _status = 'Не удалось получить позицию');
+      setState(() => _status = 'Failed to get location');
     }
   }
 
@@ -1209,7 +1209,7 @@ class _MapPageState extends State<MapPage> {
       _aqi = aqi;
       _label = cat.$1;
       _aqiColor = cat.$2;
-      _showAdvice = true; // при обновлении показываем карточку снова
+      _showAdvice = true; // show advice card on refresh again
     });
     if (aqi >= 151) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -1217,7 +1217,7 @@ class _MapPageState extends State<MapPage> {
           behavior: SnackBarBehavior.floating,
           backgroundColor: const Color(0xFFC0392B),
           content: const Text(
-              'Красный уровень: ограничьте активность на улице, используйте маску.'),
+              'Red level: limit outdoor activity, use a mask.'),
           duration: const Duration(seconds: 3),
         ),
       );
@@ -1230,12 +1230,12 @@ class _MapPageState extends State<MapPage> {
   }
 
   (String, Color) _aqiCategory(int aqi) {
-    if (aqi <= 50) return ('Хорошо', const Color(0xFF2ecc71));
-    if (aqi <= 100) return ('Умеренно', const Color(0xFFf1c40f));
-    if (aqi <= 150) return ('Вредно для чувствительных', const Color(0xFFe67e22));
-    if (aqi <= 200) return ('Вредно', const Color(0xFFe74c3c));
-    if (aqi <= 300) return ('Очень вредно', const Color(0xFF8e44ad));
-    return ('Опасно', const Color(0xFF7f0000));
+    if (aqi <= 50) return ('Good', const Color(0xFF2ecc71));
+    if (aqi <= 100) return ('Moderate', const Color(0xFFf1c40f));
+    if (aqi <= 150) return ('Unhealthy for sensitive', const Color(0xFFe67e22));
+    if (aqi <= 200) return ('Unhealthy', const Color(0xFFe74c3c));
+    if (aqi <= 300) return ('Very unhealthy', const Color(0xFF8e44ad));
+    return ('Hazardous', const Color(0xFF7f0000));
   }
 
   Color _aqiRamp(int aqi) {
@@ -1301,7 +1301,7 @@ class _MapPageState extends State<MapPage> {
   Future<void> _fetchOpenAQ() async {
     if (_center == null) return;
     setState(() {
-      _status = 'Запрашиваем OpenAQ…';
+      _status = 'Requesting OpenAQ…';
       _openAq = [];
       _nearestValue = null;
       _nearestUnit = null;
@@ -1310,7 +1310,7 @@ class _MapPageState extends State<MapPage> {
     Future<bool> _load(String parameter) async {
       final uri = Uri.https('api.openaq.org', '/v2/measurements', {
         'coordinates': '${_center!.latitude},${_center!.longitude}',
-        'radius': '25000', // 25 км вокруг
+        'radius': '25000', // 25 km around
         'limit': '100',
         'page': '1',
         'parameter': parameter,
@@ -1356,46 +1356,46 @@ class _MapPageState extends State<MapPage> {
         _nearestUnit = nearest.unit;
         _label = cat.$1;
         _aqiColor = cat.$2;
-        _status = 'OpenAQ данные получены';
-        _showAdvice = true; // при новом fetch показываем карточку
+        _status = 'OpenAQ data received';
+        _showAdvice = true; // show advice card on new fetch
       });
       return true;
     }
 
-    // Пробуем NO2, затем PM2.5
+    // Try NO2, then PM2.5
     if (!await _load('no2')) {
       await _load('pm25');
     }
   }
 
-  // категории для NO2 (EPA 1h, ppb) и PM2.5 (µg/m³, 24h)
+  // Categories for NO2 (EPA 1h, ppb) and PM2.5 (µg/m³, 24h)
   (String, Color) _categoryFromMeasurement(
       String parameter, double value, String unit) {
     if (parameter.toLowerCase() == 'no2') {
-      // привести к ppb
+      // convert to ppb if needed
       final ppb = unit.toLowerCase().contains('µg') ||
           unit.toLowerCase().contains('ug')
           ? value / 1.88
           : value;
-      if (ppb <= 53) return ('Хорошо', const Color(0xFF2ecc71));
-      if (ppb <= 100) return ('Умеренно', const Color(0xFFf1c40f));
+      if (ppb <= 53) return ('Good', const Color(0xFF2ecc71));
+      if (ppb <= 100) return ('Moderate', const Color(0xFFf1c40f));
       if (ppb <= 360) {
-        return ('Вредно для чувствительных', const Color(0xFFe67e22));
+        return ('Unhealthy for sensitive', const Color(0xFFe67e22));
       }
-      if (ppb <= 649) return ('Вредно', const Color(0xFFe74c3c));
-      if (ppb <= 1249) return ('Очень вредно', const Color(0xFF8e44ad));
-      return ('Опасно', const Color(0xFF7f0000));
+      if (ppb <= 649) return ('Unhealthy', const Color(0xFFe74c3c));
+      if (ppb <= 1249) return ('Very unhealthy', const Color(0xFF8e44ad));
+      return ('Hazardous', const Color(0xFF7f0000));
     } else {
       // PM2.5 µg/m³
       final v = value;
-      if (v <= 12) return ('Хорошо', const Color(0xFF2ecc71));
-      if (v <= 35.4) return ('Умеренно', const Color(0xFFf1c40f));
+      if (v <= 12) return ('Good', const Color(0xFF2ecc71));
+      if (v <= 35.4) return ('Moderate', const Color(0xFFf1c40f));
       if (v <= 55.4) {
-        return ('Вредно для чувствительных', const Color(0xFFe67e22));
+        return ('Unhealthy for sensitive', const Color(0xFFe67e22));
       }
-      if (v <= 150.4) return ('Вредно', const Color(0xFFe74c3c));
-      if (v <= 250.4) return ('Очень вредно', const Color(0xFF8e44ad));
-      return ('Опасно', const Color(0xFF7f0000));
+      if (v <= 150.4) return ('Unhealthy', const Color(0xFFe74c3c));
+      if (v <= 250.4) return ('Very unhealthy', const Color(0xFF8e44ad));
+      return ('Hazardous', const Color(0xFF7f0000));
     }
   }
 
@@ -1404,7 +1404,7 @@ class _MapPageState extends State<MapPage> {
     return d(a, b);
   }
 
-  // Нормализация измерения к 0..1 для единой цветовой шкалы
+  // Normalize measurement to 0..1 for unified color ramp
   double _openaqNorm(String param, double val, String unit) {
     if (param.toLowerCase() == 'no2') {
       final ppb = unit.toLowerCase().contains('µg') ||
@@ -1418,13 +1418,13 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
-  // Оценка значения в точке по ближайшим измерениям (IDW)
+  // Estimate value at a point via IDW (inverse distance weighting)
   double? _estimateOpenAq(LatLng at, {int k = 6, double epsKm = 0.05}) {
     if (_openAq.isEmpty) return null;
 
     final withD = _openAq
         .map((p) => (p, Distance()(p.p, at) / 1000.0))
-        .toList() // в км
+        .toList() // in km
       ..sort((a, b) => a.$2.compareTo(b.$2));
 
     if (withD.first.$2 <= epsKm) return withD.first.$1.value;
@@ -1441,7 +1441,7 @@ class _MapPageState extends State<MapPage> {
     return vSum / wSum;
   }
 
-  // Построение цветной сетки поверх карты из OpenAQ
+  // Build OpenAQ color grid (heat overlay)
   List<fm.Polygon> _buildOpenAqHeatPolygons(LatLng center) {
     const kmPerDegLat = 110.574;
     final kmPerDegLng = 111.320 * cos(center.latitude * pi / 180.0);
@@ -1487,7 +1487,7 @@ class _MapPageState extends State<MapPage> {
     return polys;
   }
 
-  // Маркерный цвет по величине (для режима "точки")
+  // Marker color for "points" mode
   Color _markerColor(String param, double val, String unit) {
     final t = _openaqNorm(param, val, unit);
     final idx = (t * 300).round();
@@ -1498,13 +1498,13 @@ class _MapPageState extends State<MapPage> {
   _Severity _currentSeverity() {
     final lbl = _label.toLowerCase();
     final aqi = _aqi ?? 0;
-    if (lbl.contains('опасно') ||
-        lbl.contains('очень вредно') ||
-        (lbl.contains('вредно') && aqi >= 151)) {
+    if (lbl.contains('hazardous') ||
+        lbl.contains('very unhealthy') ||
+        (lbl.contains('unhealthy') && aqi >= 151)) {
       return _Severity.red;
     }
-    if (lbl.contains('умеренно') ||
-        lbl.contains('вредно для чувствительных') ||
+    if (lbl.contains('moderate') ||
+        lbl.contains('unhealthy for sensitive') ||
         (aqi > 50 && aqi <= 150)) {
       return _Severity.yellow;
     }
@@ -1515,18 +1515,18 @@ class _MapPageState extends State<MapPage> {
     switch (s) {
       case _Severity.red:
         return const [
-          'Избегать прогулок',
-          'Использовать маску (N95/FFP2)',
-          'Перенести тренировки'
+          'Avoid outdoor walks',
+          'Use a mask (N95/FFP2)',
+          'Reschedule workouts'
         ];
       case _Severity.yellow:
         return const [
-          'Сократить время на улице',
-          'Маска при длительном нахождении',
-          'Перенести интенсивные тренировки'
+          'Limit time outdoors',
+          'Mask for prolonged exposure',
+          'Reschedule intense workouts'
         ];
       case _Severity.green:
-        return const ['Можно гулять', 'Нет ограничений'];
+        return const ['Safe to walk', 'No restrictions'];
     }
   }
 
@@ -1547,7 +1547,7 @@ class _MapPageState extends State<MapPage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Индикатор цвета
+                  // Color indicator
                   Container(
                     width: 14,
                     height: 14,
@@ -1563,7 +1563,7 @@ class _MapPageState extends State<MapPage> {
                   ),
                   const SizedBox(width: 12),
 
-                  // Вся остальная часть тянется и сама переносит строки
+                  // Text block stretches and wraps
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1583,7 +1583,7 @@ class _MapPageState extends State<MapPage> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'Шир: ${center.latitude.toStringAsFixed(4)}, Долг: ${center.longitude.toStringAsFixed(4)}',
+                          'Lat: ${center.latitude.toStringAsFixed(4)}, Lng: ${center.longitude.toStringAsFixed(4)}',
                           style: TextStyle(
                               color: Colors.white.withOpacity(.8)),
                           maxLines: 1,
@@ -1591,7 +1591,7 @@ class _MapPageState extends State<MapPage> {
                         ),
                         const SizedBox(height: 10),
 
-                        // Управления
+                        // Controls
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
@@ -1657,12 +1657,12 @@ class _MapPageState extends State<MapPage> {
                                       .showSnackBar(
                                     const SnackBar(
                                         content: Text(
-                                            'Не удалось обновить позицию')),
+                                            'Failed to refresh location')),
                                   );
                                 }
                               },
                               icon: const Icon(Icons.refresh),
-                              label: const Text('Обновить'),
+                              label: const Text('Refresh'),
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(0, 40),
                                 padding:
@@ -1680,7 +1680,7 @@ class _MapPageState extends State<MapPage> {
             ),
           ),
 
-          // Цветовое предупреждение + быстрые советы
+          // Color warning + quick tips
           Padding(
             padding:
             const EdgeInsets.fromLTRB(16, 0, 16, 10),
@@ -1692,7 +1692,7 @@ class _MapPageState extends State<MapPage> {
                 title: _label.isEmpty
                     ? (_center == null
                     ? '—'
-                    : 'Оценка качества воздуха')
+                    : 'Air quality assessment')
                     : _label,
                 tips: _adviceFor(_currentSeverity()),
                 onClose: () =>
@@ -1748,7 +1748,7 @@ class _MapPageState extends State<MapPage> {
                           polygonCulling: false,
                         ),
 
-                      // OpenAQ points (когда heat отключён)
+                      // OpenAQ points (when heat is off)
                       if (_mode == _AirSource.openaq &&
                           !_openAqHeat &&
                           _openAq.isNotEmpty)
@@ -2005,7 +2005,7 @@ class _AirAdviceCard extends StatelessWidget {
               top: 6,
               right: 6,
               child: IconButton(
-                tooltip: 'Скрыть',
+                tooltip: 'Hide',
                 icon: const Icon(Icons.close, color: Colors.white),
                 onPressed: onClose,
               ),
